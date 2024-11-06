@@ -1,9 +1,8 @@
 import * as request from '~/utils/request'
 
-export const register = async ( fullName, email, password ) => {
-    console.log(fullName, email ,password)
+export const register = async ( name, email, password,phone,birthday, gender, unit_name, level, contract_type, role) => {
     try {
-        const res = await request.post(`register`, { fullName, email, password })
+        const res = await request.post(`register`, { name, email, password,phone,birthday, gender, unit_name, level, contract_type, role})
         console.log(res)
         return res.data
 

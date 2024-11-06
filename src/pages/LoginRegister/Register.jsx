@@ -119,16 +119,15 @@ function Register () {
         }
         if(isValid) {
             setLoading(true)
-            console.log(name, email, password,gender,birthday, role, phone, unit_name, contract_type, level)
 
             // Thực hiện đăng ký
-            const res = await authService.register(name, email, password)
+            const res = await authService.register(name, email, password, phone,birthday, gender, unit_name, level, contract_type, role)
 
             const resultRegister = document.getElementById('resultRegister')
             resultRegister.innerText = res?.msg ? res?.msg : ''
 
-            if(res?.token) {
-                localStorage.setItem('token', res?.token)
+            if(res?.user) {
+                localStorage.setItem('user', res?.user)
                 window.location.href = '/'
             }
             setLoading(false)
@@ -142,7 +141,6 @@ function Register () {
             input.onblur = handleValidator
             input.onfocus = handleClear
         }
-        console.log(inputs)
 
     }, [])
     
@@ -255,9 +253,10 @@ function Register () {
                                 
                             </div>
                             
-                            <span id="resultRegister" className={cx('result-register')}></span>
                             
                         </form>
+                        <span id="resultRegister" className={cx('result-register')}></span>
+
                         <div className={cx('login__content-btn')}>
                             <button type="submit" onClick = {handleSubmit}>{loading ? <span ><Loading /></span> : 'Đăng ký' }</button>
                         </div>
