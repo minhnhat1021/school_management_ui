@@ -16,4 +16,50 @@
     height: 100%;
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    color: var(--primary-text-1);
+
+
+    a{
+        color: var(--primary-text-1);
+    }
+    button{
+        background-color: #ddd;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+
+        &:hover{
+            background-color: #f3f1f1;
+        }
+    }
+}
+.auth{
+    display: flex;
+    gap: 20px;
+
+    a:first-child{
+        color: var(--primary-text-1);
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+
+        &:hover{
+            color: #ddd;
+        }
+    }
+    a:last-child{
+        color: var(--primary-text-3);
+        background-color: #ddd;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+
+        &:hover{
+            background-color: #f3f1f1;
+        }
+    }
 }

@@ -29,20 +29,20 @@ function  Login  () {
     }
 
     // Xử lý post lên backend khi login
-    const [userName, setUserName] = useState('')
+    const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
 
     const handleSubmit = async(e) => {
         e.preventDefault()
         setLoading(true)
 
-        const res = await authService.login(userName, password)
+        const res = await authService.login(email, password)
         
         const resultLogin = document.getElementById('resultLogin')
         resultLogin.innerText = res?.msg ? res?.msg : ''
         
-        if(res?.token) {
-            localStorage.setItem('token', res?.token)
+        if(res?.user) {
+            localStorage.setItem('user', res?.user)
 
             window.location.href = '/'
         }
@@ -54,36 +54,37 @@ function  Login  () {
             <div className={cx('container')} >
                 
                     <header className={cx('header')}>
-                        <h1 >Đăng nhập vào conkeko</h1>
-                        <p >Đăng nhập để trải nhiệm những dịch vụ và tiện ích mà mà chúng tôi đem lại cho bạn</p>
+                        <h1 >Đăng nhập vào trang nhà trường</h1>
                     </header>
                     <main className={cx('body')}>
                         <form onSubmit={handleSubmit} className={cx('body__content')}>
-                            <div className={cx('body__item')}>
-                                <label htmlFor="username">Tên đăng nhập</label>
-                                <div className={cx('login__wrap-input')}>
-                                    <input type="text" id="username" value={userName} onChange={(e) => setUserName(e.target.value)} placeholder="Email hoặc Username" required />
-                                    <div className={cx('login__right-icon')}>
-                                        <WarningIcon/>
+                            <div className={cx('wrap__input', 'login')}>
+                                <div className={cx('body__item')}>
+                                    <label htmlFor="email">Tên đăng nhập</label>
+                                    <div className={cx('login__wrap-input')}>
+                                        <input type="text" id="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Vui lòng nhập email " required />
+                                        <div className={cx('login__right-icon')}>
+                                            <WarningIcon/>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div className={cx('body__item')}>
-                                <label htmlFor="password">Mật Khẩu</label>
-                                <div className={cx('login__wrap-input')}>
-                                    <input type="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Mật Khẩu" required />
-                                    <div fc='password' className={cx('login__right-icon')} onClick={(e) => handleTogglePassword(e)}>
-                                        {isShowPass ? <ShowPassword /> : <HidePassword/>}
+                                <div className={cx('body__item')}>
+                                    <label htmlFor="password">Mật Khẩu</label>
+                                    <div className={cx('login__wrap-input')}>
+                                        <input type="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Mật Khẩu" required />
+                                        <div fc='password' className={cx('login__right-icon')} onClick={(e) => handleTogglePassword(e)}>
+                                            {isShowPass ? <ShowPassword /> : <HidePassword/>}
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div className={cx('body__item', 'check-remember')}>
-                                <input type="checkbox" id="remember" name="remember" />
-                                <label htmlFor="remember">Ghi nhớ đăng nhập</label>
-                            </div>
-                            <span id="resultLogin" className={cx('result-login')}></span>
-                            <div className={cx('login__content-btn')}>
-                                <button type="submit">{loading ? <span ><Loading /></span> : 'Đăng nhập' }</button>
+                                <div className={cx('body__item', 'check-remember')}>
+                                    <input type="checkbox" id="remember" name="remember" />
+                                    <label htmlFor="remember">Ghi nhớ đăng nhập</label>
+                                </div>
+                                <span id="resultLogin" className={cx('result-login')}></span>
+                                <div className={cx('login__content-btn', 'fullwidth')}>
+                                    <button type="submit">{loading ? <span ><Loading /></span> : 'Đăng nhập' }</button>
+                                </div>
                             </div>
 
                         </form>
@@ -94,11 +95,7 @@ function  Login  () {
                             <Link to ='/register' >Đăng ký</Link>
                         </p>
                         <a href='/'>Quên mật khẩu?</a>
-                        <p className={cx('footer__about')}>
-                            Việc bạn tiếp tục sử dụng trang web này đồng nghĩa bạn đồng ý với
-                            <a href="/"> điều khoản sử dụng </a>
-                            của chúng tôi.
-                        </p>
+
                     </footer>
                 </div>                  
             </div>

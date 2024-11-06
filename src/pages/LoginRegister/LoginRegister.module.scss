@@ -58,7 +58,7 @@
 .body__content{
     width: 100%;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
 
     .result-register,
@@ -73,6 +73,10 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+
+    &.login{
+        max-width: 530px;
+    }
 }
 .body__item{
     width: 80%;
@@ -147,6 +151,9 @@
     opacity: 0.8;
     transition: all 0.3s;
 
+    &.fullwidth{
+        width: 80%;
+    }
     &:hover{
         opacity: 1;
     }

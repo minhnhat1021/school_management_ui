@@ -1,17 +1,174 @@
-.wrapper{
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: var(--header-height);
-    padding: 80px 0 120px 0;
-    color: var(--primary-text-3);
-    background-color: var(--primary-bg-1);
+// .wrapper{
+//     width: 100%;
+//     display: flex;
+//     justify-content: center;
+//     align-items: center;
+//     margin-top: var(--header-height);
+//     padding: 80px 0 120px 0;
+//     color: var(--primary-text-3);
+//     background-color: var(--primary-bg-1);
+// }
+// .container{
+//     width: var(--content-width);
+//     display: flex;
+//     flex-direction: column;
+//     justify-content: center;
+//     align-items: center;
+// }
+
+
+/* Global styles */
+
+  
+.wrapper {
+    margin-top: 100px;
+display: flex;
+flex-direction: column;
+align-items: center;
+padding: 20px;
 }
-.container{
-    width: var(--content-width);
-    display: flex;
+
+/* Container for the main content */
+.container {
+max-width: 1200px;
+margin: 0 auto;
+padding: 40px;
+background-color: #ffffff;
+border-radius: 8px;
+box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+margin-bottom: 30px;
+}
+
+/* Header */
+.header {
+text-align: center;
+margin-bottom: 50px;
+background-color: #2c3e50;
+color: #fff;
+padding: 40px;
+border-radius: 8px;
+background-image: url('https://www.w3schools.com/w3images/team2.jpg');
+background-size: cover;
+background-position: center;
+font-size: 2rem;
+box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.header h1 {
+margin: 0;
+font-size: 3rem;
+font-weight: bold;
+text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+/* Section */
+.section {
+margin-bottom: 50px;
+padding: 30px;
+background-color: #ffffff;
+border-radius: 8px;
+box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.title {
+font-size: 2.5rem;
+color: #333;
+text-align: center;
+margin-bottom: 20px;
+font-weight: 600;
+}
+
+.content {
+font-size: 1.1rem;
+color: #555;
+line-height: 1.8;
+text-align: justify;
+}
+
+/* Card for each staff member */
+.card {
+background-color: #fff;
+border-radius: 8px;
+padding: 20px;
+margin: 20px 0;
+box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+display: flex;
+align-items: center;
+transition: transform 0.3s ease-in-out;
+}
+
+.card:hover {
+transform: translateY(-10px);
+}
+
+.card-img {
+border-radius: 50%;
+width: 100px;
+height: 100px;
+margin-right: 20px;
+object-fit: cover;
+}
+
+.card-details {
+flex: 1;
+}
+
+.card-title {
+font-size: 1.5rem;
+font-weight: bold;
+color: #333;
+margin-bottom: 10px;
+}
+
+.card-content {
+font-size: 1.1rem;
+color: #444;
+margin: 5px 0;
+}
+
+.footer {
+padding: 30px;
+text-align: center;
+background-color: #2c3e50;
+color: #fff;
+border-radius: 8px;
+box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+margin-top: 40px;
+}
+
+.footer p {
+margin: 0;
+font-size: 1.2rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+.header h1 {
+    font-size: 2rem;
+}
+
+.title {
+    font-size: 1.8rem;
+}
+
+.content {
+    font-size: 1rem;
+}
+
+.card {
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    text-align: center;
+}
+
+.card-img {
+    margin: 0 auto 20px;
+}
+
+.card-details {
+    text-align: center;
+}
+
+.footer p {
+    font-size: 1rem;
+}
 }

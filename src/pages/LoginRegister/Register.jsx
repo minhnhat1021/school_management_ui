@@ -266,7 +266,6 @@ function Register () {
                             Bạn đã có tài khoản?
                             <Link to="/login" >Đăng nhập</Link>
                         </p>
-                        <a href='/'>Quên mật khẩu?</a>
                     </footer>
             </div>
         </div>
