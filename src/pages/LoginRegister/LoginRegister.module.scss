@@ -11,7 +11,7 @@
     overflow: hidden;
 }
 .container{
-    min-width: 595px;
+    width: 1200px;
     min-height: 200px;
     display: flex;
     flex-direction: column;
@@ -51,16 +51,15 @@
     width: 100%;
     margin-top: 12px;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 .body__content{
+    width: 100%;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    max-width: 360px;
-    width: 360px;
 
     .result-register,
     .result-login{
@@ -69,13 +68,21 @@
         font-size: 1.4rem;
     }
 }
+.wrap__input, .wrap__select{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 .body__item{
-    width: 100%;
+    width: 80%;
     margin-top: 10px;
     display: flex;
     flex-direction: column;
     justify-content: center;
-
+    .white{
+        color: #fff!important;
+    }
     .invalid{
         margin-top: 10px;
         padding-left: 8px;
@@ -90,6 +97,11 @@
     &.check-remember{
         flex-direction: row;
         justify-content: start;
+    }
+    select{
+        cursor: pointer;
+        height: 44px;
+        border-radius: 6px;
     }
     
 }
@@ -130,8 +142,8 @@
 }
 
 .login__content-btn{
-    width: 100%;
-    margin-top: 10px;
+    width: 40%;
+    margin-top: 30px;
     opacity: 0.8;
     transition: all 0.3s;
 
@@ -144,7 +156,7 @@
         padding: 12px 20px;
         font-size: 1.6rem;
         font-weight: 600;
-        background: linear-gradient(135deg, #efca00, #FFFACD);
+        background: #fff;
         border-radius: 6px;
         border: 1.5px solid #ddd;
         cursor: pointer;
