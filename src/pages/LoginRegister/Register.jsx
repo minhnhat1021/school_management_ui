@@ -253,7 +253,6 @@ function Register () {
                                 
                             </div>
                             
-                            
                         </form>
                         <span id="resultRegister" className={cx('result-register')}></span>
 

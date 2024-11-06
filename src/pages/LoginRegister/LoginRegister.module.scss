@@ -61,12 +61,13 @@
     justify-content: center;
     align-items: center;
 
-    .result-register,
-    .result-login{
-        margin: 8px 0;
-        color: var(--color-danger);
-        font-size: 1.4rem;
-    }
+    
+}
+.result-register,
+.result-login{
+    margin-top: 20px;
+    color: var(--color-danger);
+    font-size: 1.4rem;
 }
 .wrap__input, .wrap__select{
     flex: 1;
