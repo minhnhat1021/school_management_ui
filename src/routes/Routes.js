@@ -2,7 +2,7 @@
 import Home from '~/pages/Home'
 import { Login, Register } from '~/pages/LoginRegister'
 
-import {MainLayout} from '~/layouts'
+import {MainLayout, AdminLayout} from '~/layouts'
 import config from '~/config'
 
 
@@ -19,6 +19,7 @@ const privateRoutes = [
 
 const adminRoutes = [
     
+    { path: config.routes.admin, component: Home, layout: AdminLayout},
 
 ]
 
