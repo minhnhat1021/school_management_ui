@@ -127,7 +127,7 @@ function Register () {
             resultRegister.innerText = res?.msg ? res?.msg : ''
 
             if(res?.user) {
-                localStorage.setItem('user', res?.user)
+                localStorage.setItem('user', JSON.stringify(res?.user))
                 window.location.href = '/'
             }
             setLoading(false)

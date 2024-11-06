@@ -14,7 +14,6 @@ function Home() {
       return (
         <div className={cx('wrapper')}>
           <div className={cx('container')}>
-            {/* Giới thiệu về nhà trường */}
             <div className={cx('section')}>
               <h2 className={cx('title')}>Giới thiệu về nhà trường</h2>
               <p className={cx('content')}>
@@ -24,12 +23,11 @@ function Home() {
               </p>
             </div>
     
-            {/* Giới thiệu về cán bộ */}
             <div className={cx('section')}>
               <h2 className={cx('title')}>Giới thiệu cán bộ nhà trường</h2>
               {staffData.map((staff, index) => (
                 <div key={index} className={cx('card')}>
-                  <h3 className={cx('card-title')}>{staff.name}</h3>
+                  <p className={cx('card-title')}>{staff.name}</p>
                   <p className={cx('card-content')}>Chức vụ: {staff.role}</p>
                   <p className={cx('card-content')}>Khoa/Bộ môn: {staff.department}</p>
                 </div>

@@ -10,18 +10,29 @@ Modal.setAppElement('#root')
 const cx = classNames.bind(styles)
 
 function Header() {
-    const [data, setData] = useState(localStorage.getItem('user'))
+    const [data, setData] = useState(JSON.parse(localStorage.getItem('user')))
     const [isModalOpen, setIsModalOpen] = useState(false)
 
     const handleRowClick = () => {
         setIsModalOpen(true)
+    }
+
+    function handleLogout() {
+        localStorage.removeItem('user')
+      
+        window.location.href = '/'
     }
     return ( 
         <div className={cx('wrapper')}>
             <div className={cx('container')}>
                 <Link to='/'>Trang chủ</Link>
                 
-                {false ? <button onClick={() => handleRowClick()}>Tài khoản</button> : 
+                {data ? 
+                    <div className={cx('action')}>
+                        <button onClick={() => handleRowClick()}>Tài khoản</button>
+                        <button onClick={() => handleLogout()}>Đăng xuất</button>
+
+                    </div> : 
                     <div className={cx('auth')}>
                         <Link to='/register'>Đăng ký </Link>
                         <Link to='/login'>Đăng nhập</Link>

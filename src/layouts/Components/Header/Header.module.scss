@@ -23,7 +23,13 @@
     a{
         color: var(--primary-text-1);
     }
-    button{
+    
+}
+
+.action{
+    display: flex;
+    gap: 30px;
+    button:first-child{
         background-color: #ddd;
         border: none;
         padding: 10px 20px;
@@ -32,6 +38,19 @@
 
         &:hover{
             background-color: #f3f1f1;
+        }
+    }
+
+    button:last-child{
+        color: #fff;
+        background-color: transparent;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+
+        &:hover{
+            color: #ddd;
         }
     }
 }
