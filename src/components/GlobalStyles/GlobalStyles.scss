@@ -1,0 +1,70 @@
+@import 'normalize.css';
+
+:root{
+    --primary-bg-1: #f4f4f4;
+    --primary-bg-2: #212121;
+    --primary-bg-3: #3B3B3B;   
+
+    --primary-text-1: #fff;
+    --primary-text-3: #3B3B3B;  
+
+
+    --admin-bg-2: #343a40;
+    --admin-bg-3: #454d55;
+
+    --color-danger: #f33a58;
+    --color-success: #1dbfaf;
+
+
+    --font-family: 'Plus Jakarta Sans', sans-serif;
+
+    --header-height: 100px;
+    --content-width: 1200px;
+
+    --footer-height: 410px;
+    
+}
+
+*{
+    font-family: var(--font-family);
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html{
+    font-size: 62.5%;
+}
+
+body{
+    font-size: 1.6rem;
+    text-rendering: optimizeSpeed;
+}
+
+
+button, input, [tabindex] {
+    outline: none;
+    border: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+
+// scrollbar
+
+html *::-webkit-scrollbar {
+    border-radius: 0px;
+    width: 8px;
+}
+
+html *::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: rgba(28, 29, 32, 0.2);
+}
+
+html *::-webkit-scrollbar-track {
+    border-radius: 0px;
+    background-color: rgba(0, 0, 0, 0);
+}

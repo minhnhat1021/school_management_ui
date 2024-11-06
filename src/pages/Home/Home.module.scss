@@ -1,0 +1,17 @@
+.wrapper{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: var(--header-height);
+    padding: 80px 0 120px 0;
+    color: var(--primary-text-3);
+    background-color: var(--primary-bg-1);
+}
+.container{
+    width: var(--content-width);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

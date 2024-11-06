@@ -1,0 +1,19 @@
+.wrapper{
+    z-index: 10;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: var(--header-height);
+    display: flex;
+    justify-content: center;
+    background-color: var(--primary-bg-3);
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+}
+.container{
+    width: var(--content-width);
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+}
