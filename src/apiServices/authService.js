@@ -23,7 +23,7 @@ export const login = async ( email, password ) => {
 
 export const logout = async ( token ) => {
     try {
-        const res = await request.post(`login/out`, { token })
+        const res = await request.post(`user/logout`, { token })
         return res.data
 
     } catch (error) {

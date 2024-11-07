@@ -1,0 +1,15 @@
+.wrapper{
+    display: flex;
+    align-items: start;
+    background-color: var(--admin-bg-3);
+
+}
+.container{
+    min-height: calc(100vh - var(--header-height));
+    margin: var(--header-height) 0 0 300px;
+    padding: 24px;
+    flex: 1;
+}
+.content{
+    border-radius: 20px;
+}

@@ -1,8 +1,9 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 import { Fragment} from "react"
-import { MainLayout } from '~/layouts'
+import { MainLayout, AdminLayout } from '~/layouts'
 
 import { publicRoutes, privateRoutes, adminRoutes } from '~/routes'
+
 function App() {
     return (
         <Router>
@@ -25,6 +26,33 @@ function App() {
                                     element={ <Layout><Page /> </Layout> }
                                 />
                         
+                    })}
+
+                    {adminRoutes.map((route, index) => {
+                        let Layout = AdminLayout
+                        let SubLayout = Fragment
+
+                        if(route.layout) {
+                            Layout = route.layout 
+                        }else if(route.layout === null) {
+                            Layout = Fragment
+                        }
+
+                        if(route.subLayout) {
+                            SubLayout = route.subLayout
+                        }
+
+                        const Page = route.component
+
+                        return <Route 
+                            key={index} 
+                            path={route.path} 
+                            element={
+                                        <Layout> 
+                                            <SubLayout> <Page /> </SubLayout>
+                                        </Layout>
+                                    } 
+                        />
                     })}
                 </Routes>
             </div>

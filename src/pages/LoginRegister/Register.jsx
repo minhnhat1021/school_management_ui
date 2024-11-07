@@ -119,7 +119,6 @@ function Register () {
         }
         if(isValid) {
             setLoading(true)
-
             // Thực hiện đăng ký
             const res = await authService.register(name, email, password, phone,birthday, gender, unit_name, level, contract_type, role)
 
