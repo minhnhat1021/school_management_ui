@@ -48,7 +48,6 @@ export const userDetail = async (token) => {
 
 export const filterUsersByOptions = async ( options ) => {
 
-    console.log(options)
     try {
         const res = await request.post(`user/filter-options`, { options })
 
@@ -60,10 +59,19 @@ export const filterUsersByOptions = async ( options ) => {
 }
 
 export const findUser = async ( searchValue ) => {
-    console.log(searchValue)
     try {
         const res = await request.post(`user/find-user`, { searchValue })
 
+        return res.data
+
+    } catch (error) {
+        console.log(error)
+    }
+}
+export const autoAnswer = async (token) => {
+
+    try {
+        const res = await request.post(`user/auto-answer`, { token })
         return res.data
 
     } catch (error) {

@@ -12,11 +12,14 @@ const cx = classNames.bind(styles)
 function UserList() {
 
     const [userData, setUserData] = useState([])
+    const [filteredData, setFilteredData] = useState([])
+
 
     useEffect(() => {
         const fetchApi = async() => {
             const res = await userService.userList()
             setUserData(res?.users)
+            setFilteredData(res?.users)
         }
         fetchApi()
     }, [])
@@ -27,19 +30,18 @@ function UserList() {
         if(res.msg){
             window.location.href='/admin/user-list'
         }
-        
     }
 
     // options -------------------------------------------
     const [options, setOptions] = useState({
-        subjectTeacher: false,
-        trainingDepartment: false,
-        schoolBoard: false,
-        college: false,
-        university: false,
-        master: false,
-        leader: false,
-        lecturer: false,
+        'Bộ môn': false,
+        'Phòng đào tạo': false,
+        'Ban giám hiệu': false,
+        'Cao đẳng': false,
+        'Đại học': false,
+        'Thạc sĩ': false,
+        'Lãnh đạo': false,
+        'Giảng viên': false,
     })
 
     useEffect(() => {
@@ -171,48 +173,74 @@ function UserList() {
         }
     }
     
+    useEffect(() => {
+
+        const regex = new RegExp(searchValue, 'i')
+
+        const filtered = userData?.filter((data) => {
+            if (Object.values(options).every(val => !val)) {
+                return true
+            }
+
+            const result = Object.keys(options).some(key => {
+                if(options[key] ){
+                    return data.unit_name === key || data.role === key || data.level === key
+                }
+                return false
+            })
+
+            const isMatch = [data.name, data.id, data.email].some(value => regex.test(value))
+
+            return result && isMatch
+        })
+
+        setFilteredData(filtered)
+
+    }, [searchValue, options, userData])
+
+
     return ( 
         <div className={cx('wrapper')}>
             <div className={cx('action')}>
                 <div className={cx('options')}>
                     <div className={cx('option__item')}>
-                        <input id='subjectTeacher' name='subjectTeacher' options='' type="checkbox" className={cx('options__checkbox')}/>
+                        <input id='subjectTeacher' name='Bộ môn' options='' type="checkbox" className={cx('options__checkbox')}/>
                         <label htmlFor='subjectTeacher' className={cx('options__label')}></label>
                         <p>Bộ môn</p>
                     </div>
                     <div className={cx('option__item')}>
-                        <input id='trainingDepartment' name='trainingDepartment' options='' type="checkbox" className={cx('options__checkbox')}/>
+                        <input id='trainingDepartment' name='Phòng đào tạo' options='' type="checkbox" className={cx('options__checkbox')}/>
                         <label htmlFor='trainingDepartment' className={cx('options__label')}></label>
                         <p>Phòng đào tạo</p>
                     </div>
                     <div className={cx('option__item')}>
-                        <input id='schoolBoard' name='schoolBoard' options='' type="checkbox" className={cx('options__checkbox')}/>
+                        <input id='schoolBoard' name='Ban giám hiệu' options='' type="checkbox" className={cx('options__checkbox')}/>
                         <label htmlFor='schoolBoard' className={cx('options__label')}></label>
                         <p>Ban giám hiệu</p>
                     </div>
                     
                     <div className={cx('option__item')}>
-                        <input id='college' name='college' options='' type="checkbox" className={cx('options__checkbox')}/>
+                        <input id='college' name='Cao đẳng' options='' type="checkbox" className={cx('options__checkbox')}/>
                         <label htmlFor='college' className={cx('options__label')}></label>
                         <p>Cao đẳng</p>
                     </div>
                     <div className={cx('option__item')}>
-                        <input id='university' name='university' options='' type="checkbox" className={cx('options__checkbox')}/>
+                        <input id='university' name='Đại học' options='' type="checkbox" className={cx('options__checkbox')}/>
                         <label htmlFor='university' className={cx('options__label')}></label>
                         <p>Đại học</p>
                     </div>
                     <div className={cx('option__item')}>
-                        <input id='master' name='master' options='' type="checkbox" className={cx('options__checkbox')}/>
+                        <input id='master' name='Thạc sĩ' options='' type="checkbox" className={cx('options__checkbox')}/>
                         <label htmlFor='master' className={cx('options__label')}></label>
                         <p>Thạc sĩ</p>
                     </div>
                     <div className={cx('option__item')}>
-                        <input id='leader' name='leader' options='' type="checkbox" className={cx('options__checkbox')}/>
+                        <input id='leader' name='Lãnh đạo' options='' type="checkbox" className={cx('options__checkbox')}/>
                         <label htmlFor='leader' className={cx('options__label')}></label>
                         <p>Lãnh đạo</p>
                     </div>
                     <div className={cx('option__item')}>
-                        <input id='lecturer' name='lecturer' options='' type="checkbox" className={cx('options__checkbox')}/>
+                        <input id='lecturer' name='Giảng viên' options='' type="checkbox" className={cx('options__checkbox')}/>
                         <label htmlFor='lecturer' className={cx('options__label')}></label>
                         <p>Giảng viên</p>
                     </div>
@@ -249,68 +277,71 @@ function UserList() {
                 {statusAction && <span className={cx('checkbox__msg')}>Vui lòng chọn hành động</span>}
             </div>
             <div id='userList' className={cx('user__list')}>  
-                { userData?.length > 0 ?  
-                    (userData.map((user, index) => 
+                { filteredData?.length > 0 ?  
+                    (filteredData?.map((user, index) => 
                         <div key={index} className={cx('user__item')}>
-                            <div className={cx('checkbox')}>
+                            {/* <div className={cx('checkbox')}>
                                 <input id={user._id} vaule={user._id} name='userIds[]' type="checkbox" className={cx('actions__checkbox')}/>
                                 <label htmlFor={user._id} className={cx('actions__label')}> </label>
-                            </div>
-                            <Link to='' className={cx('user__image')}>
-                                <img
-                                    src={``}
-                                    alt='coneko'
-                                />
-                            </Link>
+                            </div> */}
                             <main className={cx('user__body')}>
                                 <div className={cx('user__body-child')}>
                                     <p className={cx('user__name')}>
-                                        Tên: <span>{user?.fullName}</span>
+                                        Tên: <span>{user?.name}</span>
                                     </p>
                                     <p className={cx('user__email')}>
                                         Email: <span>{user?.email}</span> 
                                     </p>
                                 </div>
                                 
-                                <div className={cx('user__body-child')}>
+                                <div className={cx('user__body-child', 'flex-small')}>
                                     <p className={cx('user__account-balance')}>
-                                       Số dư: <span>{(user?.accountBalance)?.toLocaleString('vi-VN') || 0}</span>
+                                       Giới tính: <span>{(user?.gender)}</span>
+                                    </p> 
+                                    <p className={cx('user__account-balance')}>
+                                       Đơn vị: <span>{(user?.unit_name)}</span>
+                                    </p>
+                                    
+                                </div>
+                                <div className={cx('user__body-child')}>
+                                    <p className={cx('user__total-spent')}>
+                                       Ngày sinh: <span>{(user?.birthday)} </span>
+                                    </p>
+                                    <p className={cx('user__total-spent')}>
+                                       Biên chế: <span>{(user?.contract_type)} </span>
+                                    </p>
+                                </div>
+                                <div className={cx('user__body-child', 'flex-small')}>
+                                    <p className={cx('user__account-balance')}>
+                                       Trình độ: <span>{(user?.level)}</span>
                                     </p> 
                                     <p className={cx('user__total-spent')}>
-                                       Tổng chi: <span>{(user?.totalSpent)?.toLocaleString('vi-VN') || 0} </span>
+                                       Chức vụ: <span>{(user?.role)} </span>
                                     </p>
-
                                 </div>
+                                
                                 <div className={cx('user__body-child')}>
                                     <p className={cx('user__created')}>
                                         Ngày tạo:  
-                                        <span>{user ? formattedDay(new Date(user?.createdAt)) : ''}</span> - 
-                                        <span>{user ? formattedTime(new Date(user?.createdAt)) : ''}</span>
+                                        <span>{user ? formattedDay(new Date(user?.created_at)) : ''}</span> - 
+                                        <span>{user ? formattedTime(new Date(user?.created_at)) : ''}</span>
                                     </p>
                                     <p className={cx('user__level')}>
-                                        Cấp bậc: <span>{user?.level}</span>
+                                        Số điện thoại: <span>{user?.phone}</span>
                                     </p>
                                 </div>
                             </main>
-                            <footer className={cx('user__footer')}>                         
+                            {/* <footer className={cx('user__footer')}>                         
                                 <button adminUpdate to={`/admin/${user?._id}/user-edit`}>Sửa</button>
                                 <button adminDelete onClick={() => handleBan(user._id)} >Ban</button>
-                            </footer>
+                            </footer> */}
                         </div>
                     )) : <div className={cx('notification')} >
                             Chưa có khách hàng nào 
                         </div>
                 }     
 
-                <div className={cx('modal__delete')}>
-                    <div className={cx('modal__header')}>
-                        
-                    </div>
-                    <div className={cx('modal__body')}>
-                        <button type='button'>Xóa</button>
-                        <button type='button'>Đóng</button>
-                    </div>
-                </div>
+                
             </div>
         </div>
     )
