@@ -27,7 +27,7 @@ export const removeFavoriteRooms = async ({ userId, roomId }) => {
 
 export const userList = async () => {
     try {
-        const res = await request.get(`users`)
+        const res = await request.get(`user/list`)
         return res.data
 
     } catch (error) {
@@ -48,8 +48,9 @@ export const userDetail = async (token) => {
 
 export const filterUsersByOptions = async ( options ) => {
 
+    console.log(options)
     try {
-        const res = await request.post(`users/filter-options`, { options })
+        const res = await request.post(`user/filter-options`, { options })
 
         return res.data
 
@@ -58,10 +59,10 @@ export const filterUsersByOptions = async ( options ) => {
     }
 }
 
-export const findUserByUserName = async ( userName ) => {
-
+export const findUser = async ( searchValue ) => {
+    console.log(searchValue)
     try {
-        const res = await request.post(`user/find-user/username`, { userName })
+        const res = await request.post(`user/find-user`, { searchValue })
 
         return res.data
 

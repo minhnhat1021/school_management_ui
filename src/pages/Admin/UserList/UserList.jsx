@@ -14,11 +14,11 @@ function UserList() {
     const [userData, setUserData] = useState([])
 
     useEffect(() => {
-        // const fetchApi = async() => {
-        //     const res = await userService.userList()
-        //     setUserData(res.users)
-        // }
-        // fetchApi()
+        const fetchApi = async() => {
+            const res = await userService.userList()
+            setUserData(res?.users)
+        }
+        fetchApi()
     }, [])
     
     const handleBan = async(id) => {
@@ -32,11 +32,14 @@ function UserList() {
 
     // options -------------------------------------------
     const [options, setOptions] = useState({
-        silver: false,
-        gold: false,
-        platinum: false,
-        diamond: false,
-        vip: false,
+        subjectTeacher: false,
+        trainingDepartment: false,
+        schoolBoard: false,
+        college: false,
+        university: false,
+        master: false,
+        leader: false,
+        lecturer: false,
     })
 
     useEffect(() => {
@@ -54,27 +57,27 @@ function UserList() {
         }
     }, [])
 
-    // useEffect(() => {
-    //     const handleFilter = async() => {
-    //         const filters = Object.keys(options).filter(
-    //           (key) => options[key] === true
-    //         )
+    useEffect(() => {
+        const handleFilter = async() => {
+            const filters = Object.keys(options).filter(
+              (key) => options[key] === true
+            )
+            const res = await userService.filterUsersByOptions(filters)
+            setUserData(res?.users)
     
-    //         const res = await userService.filterUsersByOptions(filters)
-    //         setUserData(res?.users)
-    
-    //     }
-    //     handleFilter()
-    // },[options])
+        }
+        handleFilter()
+    },[options])
 
     // search --------------------------------
-    const [userName, setUserName] = useState()
+    const [searchValue, setSearchValue] = useState()
 
     const userNameInputRef = useRef()
-    const handleFindByUserName = async(a) => {
-        const query = a === '' ? null : userName
+
+    const handleFindUser = async(a) => {
+        const query = a === '' ? null : searchValue
         console.log('query:', query)
-        const res = await userService.findUserByUserName(query)
+        const res = await userService.findUser(query)
         if(res?.user){
             setUserData(res?.user)
         } else {
@@ -83,20 +86,20 @@ function UserList() {
     }
     const handleInputChange = async (e) => {
         const newValue = e.target.value
-        setUserName(newValue)
+        setSearchValue(newValue)
     
         if (newValue === '') {
-            await handleFindByUserName('')
+            await handleFindUser('')
         }
     }
     const handleClearUserName = async() => {
-        setUserName('')
-        const res = await handleFindByUserName('')
+        setSearchValue('')
+        const res = await handleFindUser('')
         userNameInputRef.current.focus()
     }
     const handleKeyDown = async (e) => {
         if (e.key === 'Enter') {
-            await handleFindByUserName(userName)
+            await handleFindUser(searchValue)
         }
     }
     // Chuyển đổi định dạng ngày
@@ -114,7 +117,7 @@ function UserList() {
     // Checkbox-all actions
     const [action, setAction] = useState()
     const [statusAction, setStatusAction] = useState(false)
-    const [disabledActions, setDisabledActions] = useState(true)
+    const [disabledAction, setDisabledAction] = useState(true)
 
     useEffect(() => {
         var checkboxAll = document.getElementById('checkbox__all')
@@ -129,9 +132,9 @@ function UserList() {
                 const countCheckboxChecked = document.querySelectorAll("input[name='userIds[]']:checked").length
 
                 if(countCheckboxChecked > 0 ){
-                    setDisabledActions(false)
+                    setDisabledAction(false)
                 } else{
-                    setDisabledActions(true)
+                    setDisabledAction(true)
                 }
             })
             
@@ -144,9 +147,9 @@ function UserList() {
                 checkboxAll.checked = isCheckAll
 
                 if(countCheckboxChecked > 0 ){
-                    setDisabledActions(false)
+                    setDisabledAction(false)
                 } else{
-                    setDisabledActions(true)
+                    setDisabledAction(true)
                 }
             }
         }) 
@@ -173,30 +176,45 @@ function UserList() {
             <div className={cx('action')}>
                 <div className={cx('options')}>
                     <div className={cx('option__item')}>
-                        <input id='silver' name='silver' options='' type="checkbox" className={cx('options__checkbox')}/>
-                        <label htmlFor='silver' className={cx('options__label')}></label>
-                        <p>Sliver</p>
+                        <input id='subjectTeacher' name='subjectTeacher' options='' type="checkbox" className={cx('options__checkbox')}/>
+                        <label htmlFor='subjectTeacher' className={cx('options__label')}></label>
+                        <p>Bộ môn</p>
                     </div>
                     <div className={cx('option__item')}>
-                        <input id='gold' name='gold' options='' type="checkbox" className={cx('options__checkbox')}/>
-                        <label htmlFor='gold' className={cx('options__label')}></label>
-                        <p>Gold</p>
+                        <input id='trainingDepartment' name='trainingDepartment' options='' type="checkbox" className={cx('options__checkbox')}/>
+                        <label htmlFor='trainingDepartment' className={cx('options__label')}></label>
+                        <p>Phòng đào tạo</p>
                     </div>
                     <div className={cx('option__item')}>
-                        <input id='platinum' name='platinum' options='' type="checkbox" className={cx('options__checkbox')}/>
-                        <label htmlFor='platinum' className={cx('options__label')}></label>
-                        <p>Platinum</p>
+                        <input id='schoolBoard' name='schoolBoard' options='' type="checkbox" className={cx('options__checkbox')}/>
+                        <label htmlFor='schoolBoard' className={cx('options__label')}></label>
+                        <p>Ban giám hiệu</p>
                     </div>
                     
                     <div className={cx('option__item')}>
-                        <input id='diamond' name='diamond' options='' type="checkbox" className={cx('options__checkbox')}/>
-                        <label htmlFor='diamond' className={cx('options__label')}></label>
-                        <p>Diamond</p>
+                        <input id='college' name='college' options='' type="checkbox" className={cx('options__checkbox')}/>
+                        <label htmlFor='college' className={cx('options__label')}></label>
+                        <p>Cao đẳng</p>
                     </div>
                     <div className={cx('option__item')}>
-                        <input id='vip' name='vip' options='' type="checkbox" className={cx('options__checkbox')}/>
-                        <label htmlFor='vip' className={cx('options__label')}></label>
-                        <p>VIP</p>
+                        <input id='university' name='university' options='' type="checkbox" className={cx('options__checkbox')}/>
+                        <label htmlFor='university' className={cx('options__label')}></label>
+                        <p>Đại học</p>
+                    </div>
+                    <div className={cx('option__item')}>
+                        <input id='master' name='master' options='' type="checkbox" className={cx('options__checkbox')}/>
+                        <label htmlFor='master' className={cx('options__label')}></label>
+                        <p>Thạc sĩ</p>
+                    </div>
+                    <div className={cx('option__item')}>
+                        <input id='leader' name='leader' options='' type="checkbox" className={cx('options__checkbox')}/>
+                        <label htmlFor='leader' className={cx('options__label')}></label>
+                        <p>Lãnh đạo</p>
+                    </div>
+                    <div className={cx('option__item')}>
+                        <input id='lecturer' name='lecturer' options='' type="checkbox" className={cx('options__checkbox')}/>
+                        <label htmlFor='lecturer' className={cx('options__label')}></label>
+                        <p>Giảng viên</p>
                     </div>
                     
                 </div>
@@ -204,18 +222,18 @@ function UserList() {
                 <div className={cx('search')}>
                     <input 
                         ref={userNameInputRef}
-                        value={userName} 
+                        value={searchValue} 
                         onChange={handleInputChange} 
                         onKeyDown={handleKeyDown}
                         className={cx('search__input')} 
                         type="text" 
-                        placeholder="user name / email"  
+                        placeholder="MSCB / Email"  
                     />
                     <i 
                         className={cx('fa-solid fa-circle-xmark', 'Clear')}
                         onClick={handleClearUserName}
                     ></i>
-                    <button adminUpdate onClick={handleFindByUserName}>Tìm kiếm </button>
+                    <button adminUpdate onClick={handleFindUser}>Tìm kiếm </button>
                 </div>
             </div>
             <div  className={cx('actions')}>
@@ -227,7 +245,7 @@ function UserList() {
                     <option value='' >-- Chọn hành động --</option>
                     <option value="delete">Ban tài khoản</option>
                 </select>
-                <button onClick={handleActions} login disabled={disabledActions}>Thực hiện</button>
+                <button onClick={handleActions} className={cx('actions', {'disable' : disabledAction} )} >Thực hiện</button>
                 {statusAction && <span className={cx('checkbox__msg')}>Vui lòng chọn hành động</span>}
             </div>
             <div id='userList' className={cx('user__list')}>  

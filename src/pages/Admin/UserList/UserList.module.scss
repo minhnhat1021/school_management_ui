@@ -89,6 +89,20 @@
     }
     button{
         margin-left: 20px;
+        border-radius: 4px;
+        color: var(--primary-text-1);
+        background-color: #474747;
+        cursor: pointer;
+        display: flex;
+        font-size: 1.6rem;
+        font-weight: 700;
+        height: 44px;
+        padding: 12px 24px;
+        transition: all .3s ease;
+
+        &:hover{
+            background-color: #a1a1a1;
+        }
     }
 }
 /* Actions-------------------------------------------------------------------------*/
@@ -118,6 +132,28 @@
     .checkbox__msg{
         margin-left: 20px;
     }
+    button{
+        margin-left: 20px;
+        border-radius: 4px;
+        color: var(--primary-text-1);
+        background-color: #474747;
+        cursor: pointer;
+        display: flex;
+        font-size: 1.6rem;
+        font-weight: 700;
+        height: 44px;
+        padding: 12px 24px;
+        transition: all .3s ease;
+
+        &:hover{
+            background-color: #a1a1a1;
+        }
+        &.disable{
+            opacity: .5!important;
+            pointer-events: none!important;
+        }
+    }
+    
 }
 
 /* Room -------------------------------------------------------------------------*/
