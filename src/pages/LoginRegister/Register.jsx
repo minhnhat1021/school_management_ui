@@ -35,7 +35,7 @@ function Register () {
     const [birthday, setBirthday] = useState('')
 
     const [gender, setGender] = useState('Nam')
-    const [unit_name, setUnit_name] = useState('Bộ Môn')
+    const [unit_name, setUnit_name] = useState('Bộ môn')
     const [contract_type, setContract_type] = useState('Hợp đồng chính thức')
     const [level, setLevel] = useState('Đại học')
     const [role, setRole] = useState('Giảng viên')

@@ -14,6 +14,8 @@ function UserList() {
     const [userData, setUserData] = useState([])
     const [filteredData, setFilteredData] = useState([])
 
+    console.log(userData)
+    console.log(filteredData)
 
     useEffect(() => {
         const fetchApi = async() => {
@@ -59,17 +61,17 @@ function UserList() {
         }
     }, [])
 
-    useEffect(() => {
-        const handleFilter = async() => {
-            const filters = Object.keys(options).filter(
-              (key) => options[key] === true
-            )
-            const res = await userService.filterUsersByOptions(filters)
-            setUserData(res?.users)
+    // useEffect(() => {
+    //     const handleFilter = async() => {
+    //         const filters = Object.keys(options).filter(
+    //           (key) => options[key] === true
+    //         )
+    //         const res = await userService.filterUsersByOptions(filters)
+    //         setUserData(res?.users)
     
-        }
-        handleFilter()
-    },[options])
+    //     }
+    //     handleFilter()
+    // },[options])
 
     // search --------------------------------
     const [searchValue, setSearchValue] = useState()
@@ -173,6 +175,7 @@ function UserList() {
         }
     }
     
+    //
     useEffect(() => {
 
         const regex = new RegExp(searchValue, 'i')
